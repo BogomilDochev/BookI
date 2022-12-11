@@ -5,20 +5,20 @@
         </div>
         <div class="w-2/5 flex-col">
             <p class="text-3xl font-bold">{{$book->title}}</p>
-            <p class="pt-4 text-slate-500 text-lg">{{$book->author}} (Author)</p>
+            <p class="pt-4 text-slate-500 text-lg">{{$book->author->name}} (Author)</p>
             <div class="pt-4">
                 <p class="text-2xl font-semibold">Description</p>
                 <p>{!! $book->description !!}</p>
             </div>
             <div class="pt-4">
                 <p class="text-2xl font-semibold">Product Details</p>
-                <p>Publisher:</p>
-                <p>Publish Date:</p>
-                <p>Pages:</p>
-                <p>Dimensions:</p>
-                <p>Languages:</p>
-                <p>Type:</p>
-                <p>Categories</p>
+                <p>Publisher: {{ $book->publisher->name }}</p>
+                <p>Publish Date: {{$book->date}}</p>
+                <p>Pages: {{ $book->pages }}</p>
+                <p>Dimensions: {{$book->dimensions}}</p>
+                <p>Languages: {{ $book->languages }}</p>
+                <p>Type: {{ $book->type }}</p>
+                <p>Category: {{ $book->category->name }}</p>
             </div>
         </div>
     </main>

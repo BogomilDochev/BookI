@@ -30,11 +30,11 @@
                         <img src="/images/TheGreatGatsbyBook.jpg" alt="The Great Gatsby Book" class="shrink-0 h-40 w-28 pt-2">
                         <div class="relative">
                             <p class="absolute left-1/2 -top-16 transform -translate-x-1/2  w-48 text-base font-semibold text-center">{{ $book->title }}</p>
-                            <p class="absolute left-1/2 top-8 transform -translate-x-1/2  w-48 text-sm text-center">{{ $book->author }}</p>
+                            <p class="absolute left-1/2 top-8 transform -translate-x-1/2  w-48 text-sm text-center">{{ $book->author->name }}</p>
                         </div>
                         <div class="relative">
                             <p class="text-xl text-red-500 absolute bottom-12 -right-7">${{ $book->price }}</p>
-                            <button onclick="location.href='/';" class="text-white absolute bottom-2 -right-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 h-9">Review</button>
+                            <button onclick="location.href='/books/{{ $book->slug }}';" class="text-white absolute bottom-2 -right-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 h-9">Review</button>
                         </div>
                     </div>
                 @endforeach

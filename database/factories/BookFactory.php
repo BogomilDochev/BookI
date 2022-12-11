@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Category;
 use App\Models\Publisher;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Author;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -19,13 +20,13 @@ class BookFactory extends Factory
     public function definition()
     {
         return [
-            'slug' => $this->faker->slug,
-            'title' => $this->faker->sentence,
-            'author' => $this->faker->name,
-            'description' => '<p>' . implode('</p><p>', $this->faker->paragraphs(6)) . '</p>',
-            'price' => $this->faker->randomFloat(2,0,99),
+            'author_id' => Author::factory(),
             'publisher_id' => Publisher::factory(),
             'category_id' => Category::factory(),
+            'slug' => $this->faker->slug,
+            'title' => $this->faker->sentence,
+            'description' => '<p>' . implode('</p><p>', $this->faker->paragraphs(6)) . '</p>',
+            'price' => $this->faker->randomFloat(2,0,99),
             'date' => $this->faker->date(),
             'pages' => $this->faker->randomNumber(3,),
             'dimensions' => $this->faker->randomElement(['6.5 X 9.6 X 1.6 inches | 1.64 pounds',
