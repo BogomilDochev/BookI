@@ -16,9 +16,65 @@
             }
         }
     }
+
+    function increaseCount(a, b) {
+        let input = b.previousElementSibling;
+        let value = parseInt(input.value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        input.value = value;
+    }
+
+    function decreaseCount(a, b) {
+        let input = b.nextElementSibling;
+        let value = parseInt(input.value, 10);
+        if (value > 1) {
+            value = isNaN(value) ? 0 : value;
+            value--;
+            input.value = value;
+        }
+    }
 </script>
 
-<body>
+<style>
+    #bookBorder:before{
+        content: '';
+        position: absolute;
+        height: 80px;
+        width: 80px;
+        border-top: 3px solid rgb(147 197 253);
+        border-left: 3px solid rgb(147 197 253);
+        left: 55px;
+        top: 115px;
+    }
+
+    #bookBorder:after{
+        content: '';
+        position: absolute;
+        height: 80px;
+        width: 80px;
+        border-bottom: 3px solid rgb(147 197 253);
+        border-right: 3px solid rgb(147 197 253);
+        left: 20%;
+        top: 533px;
+    }
+
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .custom-number-input input:focus {
+        outline: none !important;
+    }
+
+    .custom-number-input button:focus {
+        outline: none !important;
+    }
+</style>
+
+<body class="flex flex-col min-h-screen">
     <header class="flex justify-between border-b-2 border-blue-300 pl-10 pr-5">
         <div class="pt-3">
             <a href="/">
@@ -54,7 +110,7 @@
 
     {{$slot}}
 
-    <footer class="p-4 bg-white sm:p-6 dark:bg-gray-900">
+    <footer class="p-4 bg-white sm:p-6 dark:bg-gray-900 mt-auto">
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div class="sm:flex sm:items-center sm:justify-between">
         <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 <a href="/" class="hover:underline">BookI™</a>. All Rights Reserved.
