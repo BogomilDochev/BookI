@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Publisher;
 use Illuminate\Database\Seeder;
 
@@ -48,6 +49,10 @@ class DatabaseSeeder extends Seeder
                 'category_id' => array_rand($categories)
             ]);
         }
+
+        Comment::factory()->create([
+
+        ]);
 
     }
 }

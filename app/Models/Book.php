@@ -23,4 +23,9 @@ class Book extends Model
     {
         return $this->belongsTo(Author::class);
     }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

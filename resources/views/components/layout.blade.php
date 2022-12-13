@@ -18,6 +18,9 @@
                 },
                 boxShadow: {
                     '3xl': 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+                },
+                left: {
+                    '1/5': '20%'
                 }
             }
         }
@@ -61,7 +64,7 @@
         width: 80px;
         border-bottom: 3px solid rgb(147 197 253);
         border-right: 3px solid rgb(147 197 253);
-        left: 20%;
+        left: 18.5%;
         top: 533px;
     }
 

@@ -21,11 +21,13 @@
     @auth
         <div class="flex pt-8">
             <div class="flex pr-4">
-                <a href="#" class="pt-2 pr-2 text-xs font-bold uppercase" onclick="document.querySelector('#logout-form').submit()">Log Out</a>
+                <a href="#"><img src="/images/favourite.png" alt="Wishlist" class="shrink-0 w-8 h-8 pt-1 mr-4" title="Wishlist"></a>
+                <a href="#"><img src="/images/cart.png" alt="Cart" class="shrink-0 w-8 h-8 pt-1 mr-4" title="Cart"></a>
+
                 <form id="logout-form" method="POST" action="/logout" class="hidden">
                     @csrf
                 </form>
-                <img src="/images/logout.png" alt="Register Logo" class="shrink-0 w-8 h-8 pt-1 ">
+                <a href="#"><img src="/images/logout.png" alt="Register Logo" class="shrink-0 w-8 h-8 pt-1" title="Log out" onclick="document.querySelector('#logout-form').submit()"></a>
             </div>
         </div>
     @else
