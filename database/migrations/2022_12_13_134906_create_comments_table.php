@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('book_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->text('body');
+            $table->text('avatar')->nullable();
             $table->timestamps();
         });
     }

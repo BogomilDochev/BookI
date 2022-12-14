@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,8 @@ Route::get('/', [BookController::class, 'index'])->name('home');
 
 
 Route::get('/books/{book:slug}', [BookController::class, 'show']);
+Route::post('books/{book:slug}/comments', [CommentController::class, 'store']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
