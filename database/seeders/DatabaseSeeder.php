@@ -46,7 +46,13 @@ class DatabaseSeeder extends Seeder
 
         for ($i = 0; $i < 5 ;$i++){
             Book::factory()->create([
-                'category_id' => array_rand($categories)
+                'category_id' => 1
+            ]);
+        }
+
+        for ($i = 0; $i < 5 ;$i++){
+            Book::factory()->create([
+                'category_id' => 2
             ]);
         }
 

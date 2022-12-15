@@ -43,6 +43,11 @@
             input.value = value;
         }
     }
+
+    function currentSort() {
+        let currentSort = document.getElementsByClassName("sort").getAttribute("value");
+        document.getElementById("currentSort").innerHTML = currentSort;
+    }
 </script>
 
 <style>
