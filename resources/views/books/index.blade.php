@@ -22,7 +22,7 @@
                         <div x-data="{ show: false }" @click.away="show = false" class="relative">
                             <div @click="show = ! show">
                                 <button class="py-2 pl-3 text-sm font-semibold w-full lg:w-52 place-content-end flex inline-flex">
-                                    Sort by:
+                                    {{ $currentSort }}
                                     <svg class = "transform -rotate-90" width="22"
                                          height="22" viewBox="0 0 22 22">
                                         <g fill="none" fill-rule="evenodd">
