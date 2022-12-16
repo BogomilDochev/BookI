@@ -16,7 +16,7 @@ class BookController extends Controller
 
         return view('books.index', [
             'books' => Book::sortable()->filter(
-                request(['category'])
+                request(['search', 'category'])
             )->paginate(16)->withQueryString(),
             'categories' => Category::all(),
             'currentSort' => $currentSort
