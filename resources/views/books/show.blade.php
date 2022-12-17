@@ -1,5 +1,5 @@
 <x-layout>
-    <x-header />
+    <x-header favorites="{{ $favorites }}" />
         <main class=" pt-10  grid grid-cols-3 ">
             <div id="bookBorder" class="pl-20" >
                 <img src="/images/TheGreatGatsbyBook.jpg" alt="The Great Gatsby Book" class=" h-100 w-3/5  shadow-3xl ">
@@ -25,16 +25,29 @@
             <div class="pl-28 " >
                 <div class="h-72 w-9/12  shadow-3xl">
                     <p class="text-xl font-semibold p-5">Price: <span class="text-xl text-red-500">{{ $book->price }}</span></p>
-                    <div class="grid grid-cols-1 grid-rows-3 pt-16">
-                        <div class="place-self-center">
-                            <div class="col-start-2 col-span-3 ">
-                                <button class="bg-slate-200 hover:bg-slate-400 font-medium rounded-full text-sm w-6 h-6"  onClick='decreaseCount(event, this)'>-</button>
-                                <input class="rounded-lg border-2 text-center w-12" type="number" value="1">
-                                <button class="bg-slate-200 hover:bg-slate-400 font-medium rounded-full text-sm w-6 h-6"  onClick='increaseCount(event, this)'>+</button>
-                            </div>
+                    <div class="grid grid-cols-1 grid-rows-3 pt-32">
+{{--                        <div class="place-self-center">--}}
+{{--                            <div class="col-start-2 col-span-3 ">--}}
+{{--                                <button class="bg-slate-200 hover:bg-slate-400 font-medium rounded-full text-sm w-6 h-6"  onClick='decreaseCount(event, this)'>-</button>--}}
+{{--                                <input class="rounded-lg border-2 text-center w-12" type="number" value="1">--}}
+{{--                                <button class="bg-slate-200 hover:bg-slate-400 font-medium rounded-full text-sm w-6 h-6"  onClick='increaseCount(event, this)'>+</button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+                    @auth
+                        <div class="grid grid-cols-1 grid-rows-2 place-self-center">
+                            <form method="POST" action="/books/{{ $book->slug }}/favorites">
+                                @csrf
+                                <button type="submit" class="text-white w-36 bg-red-500 hover:bg-red-700 focus:ring-4  font-medium rounded-3xl text-sm px-4 py-2 mb-1 ">Add to cart</button>
+                            </form>
+
+                            <button class="text-white  bg-amber-400 hover:bg-amber-500 focus:ring-4  font-medium rounded-3xl text-sm">Add to wishlist</button>
                         </div>
-                        <button class=" place-self-center text-white w-2/4 bg-red-500 hover:bg-red-700 focus:ring-4  font-medium rounded-3xl text-sm px-4 py-2 h-9">Add to cart</button>
-                        <button class=" place-self-center text-white w-2/4 bg-amber-400 hover:bg-amber-500 focus:ring-4  font-medium rounded-3xl text-sm px-4 py-2 h-9">Add to wishlist</button>
+                    @else
+                            <p class="font-semibold text-center pt-8">
+                                <a href="/register" class="hover:underline">Register </a>or <a href="/login" class="hover:underline">Log in</a> to add the book to your favorites or to buy it.
+                            </p>
+                    @endauth
                     </div>
                    </div>
             </div>

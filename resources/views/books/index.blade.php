@@ -1,5 +1,5 @@
 <x-layout>
-    <x-header />
+    <x-header favorites="{{ $favorites }}" />
 
         <main class="flex pl-20 pr-12 pt-10">
             <div class="w-1/5 flex-col">

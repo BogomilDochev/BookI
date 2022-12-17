@@ -92,4 +92,5 @@
 
     {{$slot}}
 
+<x-flash />
 </body>

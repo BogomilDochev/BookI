@@ -13,6 +13,10 @@ class Book extends Model
 
     public $sortable = ['title', 'price', 'created_at'];
 
+    //Resolves the N+1 query problem
+    protected $with = ['category', 'author'];
+
+
 //    public function priceSortable($query)
 //    {
 //        return $query->join('user_details', 'users.id', '=', 'user_details.user_id')
@@ -54,5 +58,10 @@ class Book extends Model
     public function comment()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function favorite()
+    {
+        return $this->hasOne(Favorite::class);
     }
 }

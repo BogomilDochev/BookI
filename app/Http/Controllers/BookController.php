@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -12,6 +14,7 @@ class BookController extends Controller
     public function index() {
 
         $currentSort = $this->currentSorting();
+        $favorites = $this->numberOfFavorites();
 
 
         return view('books.index', [
@@ -19,13 +22,19 @@ class BookController extends Controller
                 request(['search', 'category'])
             )->paginate(16)->withQueryString(),
             'categories' => Category::all(),
-            'currentSort' => $currentSort
+            'currentSort' => $currentSort,
+            'favorites' => $favorites
         ]);
     }
 
     public function show(Book $book) {
+
+        $favorites = $this->numberOfFavorites();
+
         return view('books.show', [
-           'book' => $book
+           'book' => $book,
+           'favorites' => $favorites
+
         ]);
     }
 
@@ -61,5 +70,13 @@ class BookController extends Controller
 
         }
         return ($sort);
+    }
+
+    //Returns the number of books added to favorites from the authenticated user
+    public function numberOfFavorites(): int
+    {
+        $count = Favorite::query()->where('user_id','=', auth()->id())->count();
+
+        return ($count);
     }
 }

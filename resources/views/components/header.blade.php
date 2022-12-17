@@ -1,3 +1,5 @@
+@props(['favorites'])
+
 <header class="flex justify-between border-b-2 border-blue-300 pl-10 pr-5">
     <div class="pt-3">
         <a href="/">
@@ -34,7 +36,11 @@
     @auth
         <div class="flex pt-8">
             <div class="flex pr-4">
-                <a href="#"><img src="/images/favourite.png" alt="Wishlist" class="shrink-0 w-8 h-8 pt-1 mr-4" title="Wishlist"></a>
+                <div class="static">
+                    <a href="#"><img src="/images/favourite.png" alt="Wishlist" class="shrink-0 w-8 h-8 pt-1 mr-5" title="Wishlist"></a>
+                    <span class="absolute right-32 top-12 bg-red-600 h-6 w-6 rounded-xl text-white text-center align-middle">{{ $favorites }}</span>
+                </div>
+
                 <a href="#"><img src="/images/cart.png" alt="Cart" class="shrink-0 w-8 h-8 pt-1 mr-4" title="Cart"></a>
 
                 <form id="logout-form" method="POST" action="/logout" class="hidden">
