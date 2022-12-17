@@ -12,7 +12,7 @@ class Favorite extends Model
     protected $fillable = ['user_id'];
 
 
-    public function books()
+    public function book()
     {
         return $this->belongsTo(Book::class);
     }

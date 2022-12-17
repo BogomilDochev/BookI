@@ -37,7 +37,7 @@
         <div class="flex pt-8">
             <div class="flex pr-4">
                 <div class="static">
-                    <a href="#"><img src="/images/favourite.png" alt="Wishlist" class="shrink-0 w-8 h-8 pt-1 mr-5" title="Wishlist"></a>
+                    <a href="/favorites"><img src="/images/favourite.png" alt="Wishlist" class="shrink-0 w-8 h-8 pt-1 mr-5" title="Wishlist"></a>
                     <span class="absolute right-32 top-12 bg-red-600 h-6 w-6 rounded-xl text-white text-center align-middle">{{ $favorites }}</span>
                 </div>
 

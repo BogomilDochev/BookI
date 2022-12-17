@@ -1,6 +1,6 @@
 <x-layout>
     <x-header favorites="{{ $favorites }}" />
-        <main class=" pt-10  grid grid-cols-3 ">
+        <main class=" pt-10 grid grid-cols-3 ">
             <div id="bookBorder" class="pl-20" >
                 <img src="/images/TheGreatGatsbyBook.jpg" alt="The Great Gatsby Book" class=" h-100 w-3/5  shadow-3xl ">
             </div>

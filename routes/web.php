@@ -23,8 +23,12 @@ Route::get('/', [BookController::class, 'index'])->name('home');
 
 
 Route::get('/books/{book:slug}', [BookController::class, 'show']);
-Route::post('books/{book:slug}/comments', [CommentController::class, 'store']);
-Route::post('books/{book:slug}/favorites', [FavoriteController::class, 'store']);
+Route::post('/books/{book:slug}/comments', [CommentController::class, 'store']);
+Route::post('/books/{book:slug}/favorites', [FavoriteController::class, 'store']);
+
+Route::get('/favorites', [FavoriteController::class, 'index'])->middleware('auth');
+Route::delete('/favorites/{favorite}', [FavoriteController::class, 'destroy'])->middleware('auth');
+
 
 
 Route::get('/dashboard', function () {
