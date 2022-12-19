@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BuyItemController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ProfileController;
@@ -24,10 +25,16 @@ Route::get('/', [BookController::class, 'index'])->name('home');
 
 Route::get('/books/{book:slug}', [BookController::class, 'show']);
 Route::post('/books/{book:slug}/comments', [CommentController::class, 'store']);
-Route::post('/books/{book:slug}/favorites', [FavoriteController::class, 'store']);
 
 Route::get('/favorites', [FavoriteController::class, 'index'])->middleware('auth');
 Route::delete('/favorites/{favorite}', [FavoriteController::class, 'destroy'])->middleware('auth');
+Route::post('/books/{book:slug}/favorites', [FavoriteController::class, 'store'])->middleware('auth');
+
+
+Route::get('/cart', [BuyItemController::class, 'index'])->middleware('auth');
+Route::post('/books/{book:slug}/cart', [BuyItemController::class, 'store'])->middleware('auth');
+Route::delete('/cart/{item}', [BuyItemController::class, 'destroy'])->middleware('auth');
+Route::delete('/cart', [BuyItemController::class, 'destroyAll'])->middleware('auth');
 
 
 

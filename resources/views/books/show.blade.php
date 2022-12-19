@@ -38,10 +38,14 @@
                         <div class="grid grid-cols-1 grid-rows-2 place-self-center">
                             <form method="POST" action="/books/{{ $book->slug }}/favorites">
                                 @csrf
-                                <button type="submit" class="text-white w-36 bg-red-500 hover:bg-red-700 focus:ring-4  font-medium rounded-3xl text-sm px-4 py-2 mb-1 ">Add to cart</button>
+                                <button type="submit" class="text-white w-36 bg-red-500 hover:bg-red-700 focus:ring-4 font-medium rounded-3xl text-sm px-4 py-2 mb-1 ">Add to cart</button>
                             </form>
 
-                            <button class="text-white  bg-amber-400 hover:bg-amber-500 focus:ring-4  font-medium rounded-3xl text-sm">Add to wishlist</button>
+                            <form method="POST" action="/books/{{ $book->slug }}/cart">
+                                @csrf
+                                <button type="submit" class="text-white w-36 bg-amber-400 hover:bg-amber-500 focus:ring-4 font-medium rounded-3xl text-sm px-4 py-2 mb-1">Add to wishlist</button>
+                            </form>
+
                         </div>
                     @else
                             <p class="font-semibold text-center pt-8">

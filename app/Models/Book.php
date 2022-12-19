@@ -26,11 +26,14 @@ class Book extends Model
 
     public function scopeFilter($query, array $filters) //Book::newQuery->filter()
     {
+        //search functionality for a title, description and author
         $query->when($filters['search'] ?? false, fn($query, $search) =>
-            $query->where(fn($query) =>
+            $query->whereHas('author', fn($query) =>
                 $query->where('title', 'like', '%' . request('search') . '%')
                       ->orWhere('description', 'like', '%' . request('search') . '%')
-        )
+                      ->orWhere('name', 'like', '%' . request('search') . '%')
+
+            )
         );
 
         $query->when($filters['category'] ?? false, fn($query, $category) =>
@@ -63,5 +66,10 @@ class Book extends Model
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    public function buyItems()
+    {
+        return $this->hasMany(BuyItem::class);
     }
 }

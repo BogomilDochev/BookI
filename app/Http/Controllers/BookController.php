@@ -16,7 +16,6 @@ class BookController extends Controller
         $currentSort = $this->currentSorting();
         $favorites = $this->numberOfFavorites();
 
-
         return view('books.index', [
             'books' => Book::sortable()->filter(
                 request(['search', 'category'])
@@ -28,6 +27,10 @@ class BookController extends Controller
     }
 
     public function show(Book $book) {
+
+        if(request(['search'])) {
+            return redirect('/');
+        }
 
         $favorites = $this->numberOfFavorites();
 
