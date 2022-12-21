@@ -18,7 +18,7 @@
                 <div class="grid grid-cols-1 border-b-2 border-gray-300">
                     <h2 class="col-span-1 text-xl ">Books</h2>
 
-                    <div class="col-span-2 col-start-5">
+                    <div class="col-start-5">
                         <div x-data="{ show: false }" @click.away="show = false" class="relative">
                             <div @click="show = ! show">
                                 <button class="py-2 pl-3 text-sm font-semibold w-full lg:w-52 place-content-end flex inline-flex">
@@ -61,10 +61,10 @@
                     @if($books->count())
                         @foreach($books as $book)
                             <div class="col-span-1 flex-col grid justify-items-center border-2 h-96 w-52 shadow-lg overflow-auto">
-                                <img src="/images/TheGreatGatsbyBook.jpg" alt="The Great Gatsby Book" class="shrink-0 h-40 w-28 pt-2">
+                                <img src="/images/books/{{ $book->cover }}" alt="{{ $book->title }}" class="shrink-0 h-40 w-28 pt-2">
                                 <div class="relative">
                                     <p class="absolute left-1/2 -top-16 transform -translate-x-1/2  w-48 text-base font-semibold text-center">{{ $book->title }}</p>
-                                    <p class="absolute left-1/2 top-8 transform -translate-x-1/2  w-48 text-sm text-center">{{ $book->author->name }}</p>
+                                    <p class="absolute left-1/2 top-8 transform -translate-x-1/2  w-48 text-sm text-center">{{ $book->author}}</p>
                                 </div>
                                 <div class="relative">
                                     <p class="text-xl text-red-500 absolute bottom-12 -right-7">${{ $book->price }}</p>

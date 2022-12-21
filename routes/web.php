@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminBookController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BuyItemController;
@@ -36,7 +37,15 @@ Route::post('/books/{book:slug}/cart', [BuyItemController::class, 'store'])->mid
 Route::delete('/cart/{item}', [BuyItemController::class, 'destroy'])->middleware('auth');
 Route::delete('/cart', [BuyItemController::class, 'destroyAll'])->middleware('auth');
 
+Route::middleware('can:admin')->group(function () {
+    Route::get('/admin/books', [AdminBookController::class, 'index']);
+    Route::get('/admin/books/create', [AdminBookController::class, 'create']);
+    Route::post('/admin/books', [AdminBookController::class, 'store']);
+    Route::get('/admin/books/{book}/edit', [AdminBookController::class, 'edit']);
+    Route::patch('/admin/books/{book}', [AdminBookController::class, 'update']);
+    Route::delete('/admin/books/{book}', [AdminBookController::class, 'destroy']);
 
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

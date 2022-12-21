@@ -21,17 +21,17 @@
                 <div class="mt-4">
                     <x-input-label for="avatar" :value="__('Choose an avatar')" />
                     <div class="grid grid-cols-4">
-                        <input type="radio" id="avatar1" name="avatar" value="avatar1" class="mt-6" checked>
-                        <img src="/images/avatar1.png" alt="" width="60" height="60" class="rounded-xl -ml-20" >
+                        <input type="radio" id="avatar1" name="avatar" value="avatar1.png" class="mt-6" checked>
+                        <img src="/images/avatars/avatar1.png" alt="" width="60" height="60" class="rounded-xl -ml-20" >
 
-                        <input type="radio" id="avatar3" name="avatar" value="avatar3" class="mt-6">
-                        <img src="/images/avatar3.png" alt="" width="60" height="60" class="rounded-xl -ml-20" >
+                        <input type="radio" id="avatar3" name="avatar" value="avatar3.png" class="mt-6">
+                        <img src="/images/avatars/avatar3.png" alt="" width="60" height="60" class="rounded-xl -ml-20" >
 
-                        <input type="radio" id="avatar2" name="avatar" value="avatar2" class="mt-6">
-                        <img src="/images/avatar2.png" alt="" width="60" height="60" class="rounded-xl -ml-20" >
+                        <input type="radio" id="avatar2" name="avatar" value="avatar2.png" class="mt-6">
+                        <img src="/images/avatars/avatar2.png" alt="" width="60" height="60" class="rounded-xl -ml-20" >
 
-                        <input type="radio" id="avatar4" name="avatar" value="avatar4" class="mt-6">
-                        <img src="/images/avatar4.png" alt="" width="60" height="60" class="rounded-xl -ml-20" >
+                        <input type="radio" id="avatar4" name="avatar" value="avatar4.png" class="mt-6">
+                        <img src="/images/avatars/avatar4.png" alt="" width="60" height="60" class="rounded-xl -ml-20" >
                     </div>
                     <x-input-error :messages="$errors->get('avatar')" class="mt-2" />
                 </div>

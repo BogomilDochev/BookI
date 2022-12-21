@@ -20,9 +20,9 @@ class BookFactory extends Factory
     public function definition()
     {
         return [
-            'author_id' => Author::factory(),
-            'publisher_id' => Publisher::factory(),
             'category_id' => Category::factory(),
+            'author' => $this->faker->name,
+            'publisher' => $this->faker->name,
             'slug' => $this->faker->slug,
             'title' => $this->faker->sentence,
             'description' => '<p>' . implode('</p><p>', $this->faker->paragraphs(6)) . '</p>',

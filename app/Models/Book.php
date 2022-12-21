@@ -11,10 +11,12 @@ class Book extends Model
 {
     use HasFactory, Sortable;
 
+    protected $guarded = [];
+
     public $sortable = ['title', 'price', 'created_at'];
 
     //Resolves the N+1 query problem
-    protected $with = ['category', 'author'];
+    protected $with = ['category'];
 
 
 //    public function priceSortable($query)
@@ -28,10 +30,9 @@ class Book extends Model
     {
         //search functionality for a title, description and author
         $query->when($filters['search'] ?? false, fn($query, $search) =>
-            $query->whereHas('author', fn($query) =>
+            $query->where(fn($query) =>
                 $query->where('title', 'like', '%' . request('search') . '%')
-                      ->orWhere('description', 'like', '%' . request('search') . '%')
-                      ->orWhere('name', 'like', '%' . request('search') . '%')
+                      ->orWhere('author', 'like', '%' . request('search') . '%')
 
             )
         );
@@ -48,15 +49,6 @@ class Book extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function publisher()
-    {
-        return $this->belongsTo(Publisher::class);
-    }
-
-    public function author()
-    {
-        return $this->belongsTo(Author::class);
-    }
 
     public function comment()
     {

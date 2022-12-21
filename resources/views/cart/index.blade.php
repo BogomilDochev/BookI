@@ -6,13 +6,13 @@
         @else
             @foreach($buyItems as $buyItem)
                 <div class="flex grid grid-cols-5 border-2 m-2 h-40">
-                    <img src="/images/TheGreatGatsbyBook.jpg" alt="The Great Gatsby Book" class="shrink-0 w-24 h-32 mt-4 ml-10">
+                    <img src="/images/books/{{ $buyItem->book->cover }}" alt="{{ $buyItem->book->title }}" class="shrink-0 w-24 h-32 mt-4 ml-10">
 
-                    <p class="text-center place-self-center"> {{ $buyItem->book->title}}</p>
+                    <p class="text-center place-self-center"> {{ $buyItem->book->title }}</p>
 
-                    <p class="text-center place-self-center text-red-500"> ${{ $buyItem->book->price}}</p>
+                    <p class="text-center place-self-center text-red-500"> ${{ $buyItem->book->price }}</p>
 
-                    <p class="text-center place-self-center"> {{ $buyItem->book->pages}} pages</p>
+                    <p class="text-center place-self-center"> {{ $buyItem->book->pages }} pages</p>
 
                     <form method="POST" action="/cart/{{ $buyItem->id }}">
                         @csrf

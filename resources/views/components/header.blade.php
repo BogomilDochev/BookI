@@ -36,6 +36,30 @@
     @auth
         <div class="flex pt-8">
             <div class="flex pr-4">
+                @admin
+                <x-dropdown class="items-center pt-2 pr-5">
+                    <x-slot name="trigger" class="">
+                        <button class="text-xs font-bold uppercase">Welcome, admin</button>
+                        <svg class = "transform -rotate-90 flex inline-flex " width="22"
+                             height="22" viewBox="0 0 22 22">
+                            <g fill="none" fill-rule="evenodd">
+                                <path stroke="#000" stroke-opacity=".012" stroke-width=".5" d="M21 1v20.16H.84V1z">
+                                </path>
+                                <path fill="#222"
+                                      d="M13.854 7.224l-3.847 3.856 3.847 3.856-1.184 1.184-5.04-5.04 5.04-5.04z"></path>
+                            </g>
+                        </svg>
+                    </x-slot>
+
+
+                    <x-slot name="content">
+                        <x-dropdown-link href="/admin/books/create">Add Book</x-dropdown-link>
+                        <x-dropdown-link href="/admin/books">Edit Books</x-dropdown-link>
+                    </x-slot>
+                </x-dropdown>
+                {{--            <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">All Posts</x-dropdown-item>--}}
+                {{--            <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">New Post</x-dropdown-item>--}}
+                @endadmin
                 <div class="static">
                     <a href="/favorites"><img src="/images/favourite.png" alt="Wishlist" class="shrink-0 w-8 h-8 pt-1 mr-5" title="Wishlist"></a>
                     <span class="absolute right-32 top-12 bg-red-600 h-6 w-6 rounded-xl text-white text-center align-middle">{{ $favorites }}</span>

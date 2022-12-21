@@ -2,18 +2,18 @@
     <x-header favorites="{{ $favorites }}" />
         <main class=" pt-10 grid grid-cols-3 ">
             <div id="bookBorder" class="pl-20" >
-                <img src="/images/TheGreatGatsbyBook.jpg" alt="The Great Gatsby Book" class=" h-100 w-3/5  shadow-3xl ">
+                <img src="/images/books/{{ $book->cover }}" alt="{{ $book->title }}" class=" h-100 w-3/5  shadow-3xl ">
             </div>
             <div class="">
                 <p class="text-3xl font-bold">{{$book->title}}</p>
-                <p class="pt-4 text-slate-500 text-lg">{{$book->author->name}} (Author)</p>
+                <p class="pt-4 text-slate-500 text-lg">{{$book->author}} (Author)</p>
                 <div class="pt-4">
                     <p class="text-2xl font-semibold">Description</p>
                     <p>{!! $book->description !!}</p>
                 </div>
                 <div class="pt-4">
                     <p class="text-2xl font-semibold">Product Details</p>
-                    <p>Publisher: {{ $book->publisher->name }}</p>
+                    <p>Publisher: {{ $book->publisher }}</p>
                     <p>Publish Date: {{$book->date}}</p>
                     <p>Pages: {{ $book->pages }}</p>
                     <p>Dimensions: {{$book->dimensions}}</p>
@@ -38,12 +38,12 @@
                         <div class="grid grid-cols-1 grid-rows-2 place-self-center">
                             <form method="POST" action="/books/{{ $book->slug }}/favorites">
                                 @csrf
-                                <button type="submit" class="text-white w-36 bg-red-500 hover:bg-red-700 focus:ring-4 font-medium rounded-3xl text-sm px-4 py-2 mb-1 ">Add to cart</button>
+                                <button type="submit" class="text-white w-36 bg-amber-400 hover:bg-amber-500 focus:ring-4 font-medium rounded-3xl text-sm px-4 py-2 mb-1">Add to wishlist</button>
                             </form>
 
                             <form method="POST" action="/books/{{ $book->slug }}/cart">
                                 @csrf
-                                <button type="submit" class="text-white w-36 bg-amber-400 hover:bg-amber-500 focus:ring-4 font-medium rounded-3xl text-sm px-4 py-2 mb-1">Add to wishlist</button>
+                                <button type="submit" class="text-white w-36 bg-red-500 hover:bg-red-700 focus:ring-4 font-medium rounded-3xl text-sm px-4 py-2 mb-1 ">Add to cart</button>
                             </form>
 
                         </div>
@@ -64,7 +64,7 @@
                             @csrf
 
                             <header class="flex items-center">
-                                <img src="/images/{{ Auth::user()->avatar }}.png"
+                                <img src="/images/avatars/{{ Auth::user()->avatar }}"
                                      alt="Avatar of the user"
                                      width="40"
                                      height="40"
@@ -104,7 +104,7 @@
                         @foreach($book->comment as $comment)
                             <article class="flex space-x-4 bg-gray-50">
                                 <div class="flex-shrink-0">
-                                    <img src="/images/{{ $comment->user->avatar }}.png" alt="" width="60" height="60" class="rounded-xl">
+                                    <img src="/images/avatars/{{ $comment->user->avatar }}" alt="" width="60" height="60" class="rounded-xl">
                                 </div>
 
                                 <div>
