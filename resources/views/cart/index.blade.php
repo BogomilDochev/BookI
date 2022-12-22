@@ -9,7 +9,7 @@
                     @if($buyItem->book->cover == null)
                         <img src="/images/imageNotAvailable.png" alt="{{ $buyItem->book->title }}" class="shrink-0 w-24 h-32 mt-4 ml-10">
                     @else
-                        <img src="{{ asset('storage/' . $buyItem->book->cover) }}" alt="{{ $buyItem->title }}" class="shrink-0 w-24 h-32 mt-4 ml-10">
+                        <img src="{{ asset('storage/' . $buyItem->book->cover) }}" alt="{{ $buyItem->book->title }}" class="shrink-0 w-24 h-32 mt-4 ml-10">
                     @endif
                     <p class="text-center place-self-center"> {{ $buyItem->book->title }}</p>
 
@@ -25,12 +25,14 @@
                     </form>
                 </div>
             @endforeach
+            <p class="text-right text-3xl font-semibold pr-4">Total: {{ $total }}</p>
             <form method="POST" action="/cart" class="grid justify-items-center ">
                 @csrf
                 @method('DELETE')
 
                 <button type="submit" class="text-white w-36 h-12 bg-blue-500 hover:bg-blue-700 focus:ring-4  font-medium rounded-3xl text-sm">Buy</button>
             </form>
+
         @endif
     </main>
     <x-footer />

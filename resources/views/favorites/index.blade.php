@@ -9,7 +9,7 @@
                         @if($favorite->book->cover == null)
                             <img src="/images/imageNotAvailable.png" alt="{{ $favorite->book->title }}" class="shrink-0 w-24 h-32 mt-4 ml-10">
                         @else
-                            <img src="{{ asset('storage/' . $favorite->book->cover) }}" alt="{{ $book->title }}" class="shrink-0 w-24 h-32 mt-4 ml-10">
+                            <img src="{{ asset('storage/' . $favorite->book->cover) }}" alt="{{ $favorite->book->title }}" class="shrink-0 w-24 h-32 mt-4 ml-10">
                         @endif
                         <p class="text-center place-self-center"> {{ $favorite->book->title }}</p>
 

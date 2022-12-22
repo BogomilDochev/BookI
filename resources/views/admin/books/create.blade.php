@@ -6,7 +6,7 @@
 
             <div class="w-96">
                 <x-input-label for="title" :value="__('Title')" />
-                <x-text-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('name')" />
+                <x-text-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" />
                 <x-input-error :messages="$errors->get('title')" class="mt-2" />
             </div>
 
@@ -71,7 +71,7 @@
             <div>
                 <x-input-label for="date" :value="__('Publish Date')" />
                 <x-text-input id="date" class="block mt-1 w-full" type="date" name="date" :value="old('date')" />
-                <x-input-error :messages="$errors->get('publish_date')" class="mt-2" />
+                <x-input-error :messages="$errors->get('date')" class="mt-2" />
             </div>
 
             <div>

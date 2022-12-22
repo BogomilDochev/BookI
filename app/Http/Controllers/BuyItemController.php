@@ -12,12 +12,14 @@ class BuyItemController extends Controller
     {
         $favorites = (new BookController)->numberOfFavorites();
         $cartItems = $this->numberOfCartItems();
+        $total = $this->totalPrice();
 
         return view('cart.index', [
             'buyItems' => BuyItem::latest()->where('user_id','=', auth()->id())->filter(
                 request(['search']))->paginate(16)->withQueryString(),
             'favorites' => $favorites,
-            'cartItems' => $cartItems
+            'cartItems' => $cartItems,
+            'total' => $total
         ]);
     }
 
@@ -56,5 +58,25 @@ class BuyItemController extends Controller
         $count = BuyItem::query()->where('user_id','=', auth()->id())->count();
 
         return ($count);
+    }
+
+    //Returns the sum of the price of all products in the cart
+    public function totalPrice()
+    {
+        $price=[];
+
+        if(BuyItem::latest()->where('user_id','=', auth()->id())->exists())
+        {
+            $allBuyItems = BuyItem::latest()->where('user_id','=', auth()->id())->count();
+
+            $total = BuyItem::latest()->where('user_id','=', auth()->id())->get();
+
+            for($i=0; $i<$allBuyItems; $i++)
+            {
+                $price[] = $total[$i]->book->price;//
+            }
+        }
+
+        return array_sum($price);
     }
 }
