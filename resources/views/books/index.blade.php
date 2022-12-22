@@ -61,7 +61,11 @@
                     @if($books->count())
                         @foreach($books as $book)
                             <div class="col-span-1 flex-col grid justify-items-center border-2 h-96 w-52 shadow-lg overflow-auto">
-                                <img src="/images/books/{{ $book->cover }}" alt="{{ $book->title }}" class="shrink-0 h-40 w-28 pt-2">
+                                @if($book->cover == null)
+                                    <img src="/images/imageNotAvailable.png" alt="{{ $book->title }}" class="shrink-0 h-44 w-28 pt-2">
+                                @else
+                                    <img src="{{ asset('storage/' . $book->cover) }}" alt="{{ $book->title }}" class="shrink-0 h-44 w-28 pt-2">
+                                @endif
                                 <div class="relative">
                                     <p class="absolute left-1/2 -top-16 transform -translate-x-1/2  w-48 text-base font-semibold text-center">{{ $book->title }}</p>
                                     <p class="absolute left-1/2 top-8 transform -translate-x-1/2  w-48 text-sm text-center">{{ $book->author}}</p>

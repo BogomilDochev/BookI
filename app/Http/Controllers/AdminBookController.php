@@ -38,11 +38,12 @@ class AdminBookController extends Controller
 //            'cover' => [],
             'title' => 'required',
             'slug' => ['required', Rule::unique('books', 'slug')->ignore($book)],
+            'cover' => 'nullable|image',
             'author' => 'required',
             'publisher' => 'required',
             'category_id' => ['required', Rule::exists('categories', 'id')],
             'description' => 'required',
-            'price' => 'required',
+            'price' => 'required|max:999',
             'date' => 'required|date_format:"Y-m-d',
             'pages' => 'required',
             'dimensions' => 'required',
@@ -50,7 +51,10 @@ class AdminBookController extends Controller
             'type' => 'required'
         ]);
 
-//        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+        if(array_key_exists('cover', $attributes))
+        {
+            $attributes['cover'] = request()->file('cover')->store('books');
+        }
 
         Book::create($attributes);
 
@@ -73,17 +77,22 @@ class AdminBookController extends Controller
 //            'cover' => [],
             'title' => 'required',
             'slug' => ['required', Rule::unique('books', 'slug')->ignore($book)],
+            'cover' => 'image',
             'author' => 'required',
             'publisher' => 'required',
             'category_id' => ['required', Rule::exists('categories', 'id')],
             'description' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric|min:0|max:999',
             'date' => 'required|date_format:"Y-m-d',
             'pages' => 'required',
             'dimensions' => 'required',
             'languages' => 'required',
             'type' => 'required'
         ]);
+
+        if($attributes['cover'] ?? false){
+            $attributes['cover'] = request()->file('cover')->store('books');
+        }
 
         $book->update($attributes);
 

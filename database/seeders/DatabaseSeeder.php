@@ -25,8 +25,8 @@ class DatabaseSeeder extends Seeder
             'Autobiography and memoir', 'Biography', 'Essays', 'Non-fiction novel', 'Self-help'
         ];
 
-        $covers=['ToKillAMockingbirdBook.jpg', '1984.jpg', 'HarryPotterAndThePhilosophersStone.jpg', 'TheLordOfTheRings.jpg',
-            'TheGreatGatsbyBook.jpg', 'Fahrenheit451.jpg', 'TheLionTheWitchAndTheWardrobe.jpg', 'AliceInWonderland.jpg'];
+        $covers=['books/ToKillAMockingbirdBook.jpg', 'books/1984.jpg', 'books/HarryPotterAndThePhilosophersStone.jpg', 'books/TheLordOfTheRings.jpg',
+            'books/TheGreatGatsbyBook.jpg', 'books/Fahrenheit451.jpg', 'books/TheLionTheWitchAndTheWardrobe.jpg', 'books/AliceInWonderland.jpg'];
 
         $titles=['To Kill a Mockingbird', '1984', "Harry Potter and the Philosopher's Stone", 'The Lord Of The Rings',
             'The Great Gatsby', 'Fahrenheit451', 'The Lion, the Witch and the Wardrobe', 'Alice in Wonderland'];

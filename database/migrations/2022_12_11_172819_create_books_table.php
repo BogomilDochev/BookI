@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('cover')->nullable();
             $table->text('description');
-            $table->decimal('price',4,2);
+            $table->decimal('price',6,2);
             $table->date('date');
             $table->integer('pages');
             $table->string('dimensions');

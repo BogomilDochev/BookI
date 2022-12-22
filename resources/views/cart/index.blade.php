@@ -6,8 +6,11 @@
         @else
             @foreach($buyItems as $buyItem)
                 <div class="flex grid grid-cols-5 border-2 m-2 h-40">
-                    <img src="/images/books/{{ $buyItem->book->cover }}" alt="{{ $buyItem->book->title }}" class="shrink-0 w-24 h-32 mt-4 ml-10">
-
+                    @if($buyItem->book->cover == null)
+                        <img src="/images/imageNotAvailable.png" alt="{{ $buyItem->book->title }}" class="shrink-0 w-24 h-32 mt-4 ml-10">
+                    @else
+                        <img src="{{ asset('storage/' . $buyItem->book->cover) }}" alt="{{ $buyItem->title }}" class="shrink-0 w-24 h-32 mt-4 ml-10">
+                    @endif
                     <p class="text-center place-self-center"> {{ $buyItem->book->title }}</p>
 
                     <p class="text-center place-self-center text-red-500"> ${{ $buyItem->book->price }}</p>

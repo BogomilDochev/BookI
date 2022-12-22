@@ -17,6 +17,15 @@
                     <x-input-error :messages="$errors->get('slug')" class="mt-2" />
                 </div>
 
+                <div class="flex mt-6">
+                    <div class="flex-1">
+                        <x-text-input name="cover" type="file" :value="old('cover', $book->cover)"/>
+                    </div>
+
+                    <img src="{{ asset('storage/' . $book->cover) }}" alt="{{ $book->title }}" class="rounded-xl ml-6" width="100">
+                    <x-input-error :messages="$errors->get('cover')" class="mt-2" />
+                </div>
+
                 <div>
                     <x-input-label for="author" :value="__('Author')" />
                     <x-text-input id="author" class="block mt-1 w-full" type="text" name="author" :value="old('author', $book->author)" />
@@ -66,7 +75,7 @@
                 <div>
                     <x-input-label for="date" :value="__('Publish Date')" />
                     <x-text-input id="date" class="block mt-1 w-full" type="date" name="date" :value="old('date', $book->date)" />
-                    <x-input-error :messages="$errors->get('publish_date')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('date')" class="mt-2" />
                 </div>
 
                 <div>

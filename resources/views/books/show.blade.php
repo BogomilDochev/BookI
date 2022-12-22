@@ -2,7 +2,11 @@
     <x-header favorites="{{ $favorites }}" />
         <main class=" pt-10 grid grid-cols-3 ">
             <div id="bookBorder" class="pl-20" >
-                <img src="/images/books/{{ $book->cover }}" alt="{{ $book->title }}" class=" h-100 w-3/5  shadow-3xl ">
+                @if($book->cover == null)
+                    <img src="/images/imageNotAvailable.png" alt="{{ $book->title }}" class="h-100 w-3/5  shadow-3xl">
+                @else
+                    <img src="{{ asset('storage/' . $book->cover) }}" alt="{{ $book->title }}" class="h-100 w-3/5  shadow-3xl">
+                @endif
             </div>
             <div class="">
                 <p class="text-3xl font-bold">{{$book->title}}</p>

@@ -17,6 +17,12 @@
             </div>
 
             <div>
+                <x-input-label for="cover" :value="__('Cover')" />
+                <x-text-input id="cover" class="block mt-1 w-full" type="file" name="cover" :value="old('cover')" />
+                <x-input-error :messages="$errors->get('cover')" class="mt-2" />
+            </div>
+
+            <div>
                 <x-input-label for="author" :value="__('Author')" />
                 <x-text-input id="author" class="block mt-1 w-full" type="text" name="author" :value="old('author')" />
                 <x-input-error :messages="$errors->get('author')" class="mt-2" />
