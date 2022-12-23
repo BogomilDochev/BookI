@@ -13,16 +13,13 @@ class BookController extends Controller
 
     public function index() {
 
-        $currentSort = $this->currentSorting();
-        $favorites = $this->numberOfFavorites();
-
         return view('books.index', [
             'books' => Book::sortable()->filter(
                 request(['search', 'category'])
             )->paginate(16)->withQueryString(),
             'categories' => Category::all(),
-            'currentSort' => $currentSort,
-            'favorites' => $favorites
+            'currentSort' => $this->currentSorting(),
+            'favorites' => $this->numberOfFavorites()
         ]);
     }
 
@@ -32,11 +29,9 @@ class BookController extends Controller
             return redirect('/');
         }
 
-        $favorites = $this->numberOfFavorites();
-
         return view('books.show', [
            'book' => $book,
-           'favorites' => $favorites
+           'favorites' => $this->numberOfFavorites()
 
         ]);
     }

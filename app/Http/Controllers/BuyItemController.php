@@ -10,16 +10,12 @@ class BuyItemController extends Controller
 {
     public function index()
     {
-        $favorites = (new BookController)->numberOfFavorites();
-        $cartItems = $this->numberOfCartItems();
-        $total = $this->totalPrice();
-
         return view('cart.index', [
             'buyItems' => BuyItem::latest()->where('user_id','=', auth()->id())->filter(
                 request(['search']))->paginate(16)->withQueryString(),
-            'favorites' => $favorites,
-            'cartItems' => $cartItems,
-            'total' => $total
+            'favorites' => (new BookController)->numberOfFavorites(),
+            'cartItems' => $this->numberOfCartItems(),
+            'total' => $this->totalPrice()
         ]);
     }
 
@@ -67,7 +63,7 @@ class BuyItemController extends Controller
 
         if(BuyItem::latest()->where('user_id','=', auth()->id())->exists())
         {
-            $allBuyItems = BuyItem::latest()->where('user_id','=', auth()->id())->count();
+            $allBuyItems = $this->numberOfCartItems();
 
             $total = BuyItem::latest()->where('user_id','=', auth()->id())->get();
 

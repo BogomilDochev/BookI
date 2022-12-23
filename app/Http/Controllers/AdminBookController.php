@@ -10,23 +10,22 @@ class AdminBookController extends Controller
 {
     public function index()
     {
-        $favorites = (new BookController)->numberOfFavorites();
-
         return view('admin.books.index', [
             'books' => Book::latest()->filter(
                 request(['search'])
             )->paginate(50)->withQueryString(),
-            'favorites' => $favorites
+            'favorites' => (new BookController)->numberOfFavorites()
         ]);
     }
 
     public function create()
     {
-        $favorites = (new BookController)->numberOfFavorites();
-
+        if(request(['search'])) {
+            return redirect('/');
+        }
 
         return view('admin.books.create', [
-            'favorites' => $favorites
+            'favorites' => (new BookController)->numberOfFavorites()
         ]);
     }
 
@@ -34,27 +33,9 @@ class AdminBookController extends Controller
     {
         $book = new Book();
 
-        $attributes = request()->validate([
-//            'cover' => [],
-            'title' => 'required',
-            'slug' => ['required', Rule::unique('books', 'slug')->ignore($book)],
-            'cover' => 'nullable|image',
-            'author' => 'required',
-            'publisher' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id')],
-            'description' => 'required',
-            'price' => 'required|max:999',
-            'date' => 'required|date_format:"Y-m-d',
-            'pages' => 'required',
-            'dimensions' => 'required',
-            'languages' => 'required',
-            'type' => 'required'
-        ]);
+        $attributes = $this->validatingInputs($book);
 
-        if(array_key_exists('cover', $attributes))
-        {
-            $attributes['cover'] = request()->file('cover')->store('books');
-        }
+        $attributes = $this->checkIfCoverExists($attributes);
 
         Book::create($attributes);
 
@@ -63,36 +44,21 @@ class AdminBookController extends Controller
 
     public function edit(Book $book)
     {
-        $favorites = (new BookController)->numberOfFavorites();
+        if(request(['search'])) {
+            return redirect('/');
+        }
 
         return view('admin.books.edit', [
             'book' => $book,
-            'favorites' => $favorites
+            'favorites' => (new BookController)->numberOfFavorites()
         ]);
     }
 
     public function update(Book $book)
     {
-        $attributes = request()->validate([
-//            'cover' => [],
-            'title' => 'required',
-            'slug' => ['required', Rule::unique('books', 'slug')->ignore($book)],
-            'cover' => 'image',
-            'author' => 'required',
-            'publisher' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id')],
-            'description' => 'required',
-            'price' => 'required|numeric|min:0|max:999',
-            'date' => 'required|date_format:"Y-m-d',
-            'pages' => 'required',
-            'dimensions' => 'required',
-            'languages' => 'required',
-            'type' => 'required'
-        ]);
+        $attributes = $this->validatingInputs($book);
 
-        if($attributes['cover'] ?? false){
-            $attributes['cover'] = request()->file('cover')->store('books');
-        }
+        $attributes = $this->checkIfCoverExists($attributes);
 
         $book->update($attributes);
 
@@ -105,4 +71,35 @@ class AdminBookController extends Controller
 
         return back()->with('success', 'Book Deleted!');
     }
+
+    //Validating the inputs given from the user
+    public function validatingInputs(Book $book): array
+    {
+        $attributes = request()->validate([
+            'title' => 'required',
+            'slug' => ['required', Rule::unique('books', 'slug')->ignore($book)],
+            'cover' => 'nullable|image',
+            'author' => 'required',
+            'publisher' => 'required',
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+            'description' => 'required',
+            'price' => 'required|numeric|min:0|max:999',
+            'date' => 'required|date_format:"Y-m-d',
+            'pages' => 'required',
+            'dimensions' => 'required',
+            'languages' => 'required',
+            'type' => 'required'
+        ]);
+        return $attributes;
+    }
+
+    //Checks if cover exists and store it if exists
+    public function checkIfCoverExists(array $attributes): array
+    {
+        if (array_key_exists('cover', $attributes)) {
+            $attributes['cover'] = request()->file('cover')->store('books');
+        }
+        return $attributes;
+    }
+
 }

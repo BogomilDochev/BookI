@@ -11,13 +11,10 @@ class FavoriteController extends Controller
 {
     public function index()
     {
-        $favorites = (new BookController)->numberOfFavorites();
-
-
         return view('favorites.index', [
             'favoriteBooks' => Favorite::latest()->where('user_id','=', auth()->id())->filter(
                 request(['search']))->paginate(16)->withQueryString(),
-            'favorites' => $favorites
+            'favorites' => (new BookController)->numberOfFavorites()
         ]);
     }
 

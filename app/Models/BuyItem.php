@@ -10,13 +10,14 @@ class BuyItem extends Model
     use HasFactory;
 
     protected $fillable = ['user_id'];
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, fn($query, $search) =>
-        $query->whereHas('book', fn($query) =>
-        $query->where('title', 'like', '%' . request('search') . '%')
-            ->orWhere('pages', 'like', '%' . request('search') . '%')
-            ->orWhere('price', 'like', '%' . request('search') . '%')
+            $query->whereHas('book', fn($query) =>
+                $query->where('title', 'like', '%' . request('search') . '%')
+                        ->orWhere('pages', 'like', '%' . request('search') . '%')
+                        ->orWhere('price', 'like', '%' . request('search') . '%')
 
         )
         );

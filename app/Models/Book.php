@@ -18,14 +18,6 @@ class Book extends Model
     //Resolves the N+1 query problem
     protected $with = ['category'];
 
-
-//    public function priceSortable($query)
-//    {
-//        return $query->join('user_details', 'users.id', '=', 'user_details.user_id')
-//            ->orderBy('price', '-')
-//            ->select('books.*');
-//    }
-
     public function scopeFilter($query, array $filters) //Book::newQuery->filter()
     {
         //search functionality for a title, description and author
@@ -48,7 +40,6 @@ class Book extends Model
     {
         return $this->belongsTo(Category::class);
     }
-
 
     public function comment()
     {
