@@ -1,0 +1,13 @@
+@props(['name', 'type', 'label'])
+
+<div>
+    <x-form.input-label for="{{ $name }}">{{ $label ?? ucwords($name) }}</x-form.input-label>
+    <input class="w-96 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
+           id="{{ $name }}"
+           type="{{ $type }}"
+           name="{{ $name }}"
+           {{ $attributes(['value' => old($name)]) }}
+    >
+
+    <x-form.input-error name="{{ $name }}" />
+</div>

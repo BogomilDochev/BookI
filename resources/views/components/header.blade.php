@@ -2,9 +2,7 @@
 
 <header class="flex justify-between border-b-2 border-blue-300 pl-10 pr-5">
     <div class="pt-3">
-        <a href="/">
-            <img src="/images/logo.png" alt="BookI Logo" width="100" height="16">
-        </a>
+        <x-application-logo />
     </div>
 
     <div class="w-1/3 pt-6 w-2/4 shrink-0">
@@ -27,7 +25,7 @@
                         placeholder="Search for books.."
                         value="{{ request('search') }}"
                     >
-                    <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm px-4 py-2">Search</button>
+                        <x-primary-button class="absolute right-2.5 bottom-2.5">Search</x-primary-button>
                 </form>
             </div>
         </form>
@@ -36,10 +34,10 @@
     @auth
         <div class="flex pt-8">
             <div class="flex pr-4">
-                @admin
+
                 <x-dropdown class="items-center pt-2 pr-5">
                     <x-slot name="trigger" class="">
-                        <button class="text-xs font-bold uppercase">Welcome, admin</button>
+                        <button class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}</button>
                         <svg class = "transform -rotate-90 flex inline-flex " width="22"
                              height="22" viewBox="0 0 22 22">
                             <g fill="none" fill-rule="evenodd">
@@ -53,13 +51,14 @@
 
 
                     <x-slot name="content">
+                        @admin
                         <x-dropdown-link href="/admin/books/create">Add Book</x-dropdown-link>
                         <x-dropdown-link href="/admin/books">Edit Books</x-dropdown-link>
+                        @endadmin
+                        <x-dropdown-link href="/profile">Profile</x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
-                {{--            <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">All Posts</x-dropdown-item>--}}
-                {{--            <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">New Post</x-dropdown-item>--}}
-                @endadmin
+
                 <div class="static">
                     <a href="/favorites"><img src="/images/favourite.png" alt="Wishlist" class="shrink-0 w-8 h-8 pt-1 mr-5" title="Wishlist"></a>
                     <span class="absolute right-32 top-12 bg-red-600 h-6 w-6 rounded-xl text-white text-center align-middle">{{ $favorites }}</span>
