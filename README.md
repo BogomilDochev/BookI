@@ -65,5 +65,5 @@ In order to run the project locally, you need to execute the following steps:
 
 <a name="project"></a>
 ## In the project
-In order to be able to add or edit books in the web application, you need to create account with the name Bogomil. If you create a project with another name, you will have only the rights to add books to favorites, add books to cart and leave a comment under a book.
+In order to be admin and have the rights to add or edit books in the web application, you need to create account with the name Bogomil. If you register with another name, you will only have the rights to add books to favorites, add books to cart and leave a comment under a book.
 
