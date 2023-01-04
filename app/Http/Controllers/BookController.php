@@ -19,7 +19,7 @@ class BookController extends Controller
             )->paginate(16)->withQueryString(),
             'categories' => Category::all(),
             'currentSort' => $this->currentSorting(),
-            'favorites' => $this->numberOfFavorites()
+            'favorites' => (new Book)->numberOfFavorites()
         ]);
     }
 
@@ -31,7 +31,7 @@ class BookController extends Controller
 
         return view('books.show', [
            'book' => $book,
-           'favorites' => $this->numberOfFavorites()
+           'favorites' => (new Book)->numberOfFavorites()
 
         ]);
     }
@@ -48,7 +48,7 @@ class BookController extends Controller
         if (array_key_exists('query', $url_components)) {
             parse_str($url_components['query'], $params);
 
-            if (array_key_exists('sort', $params) && array_key_exists('sort', $params)) {
+            if (array_key_exists('sort', $params) && array_key_exists('direction', $params)) {
                 if ($params['sort'] == 'price' && $params['direction'] == 'asc') {
                     $sort = 'Lowest price';
                 }
@@ -57,11 +57,11 @@ class BookController extends Controller
                     $sort = 'Highest price';
                 }
 
-                if ($params['sort'] == 'created_at' && $params['direction'] == 'asc') {
+                if ($params['sort'] == 'created_at' && $params['direction'] == 'desc') {
                     $sort = 'Newest';
                 }
 
-                if ($params['sort'] == 'created_at' && $params['direction'] == 'desc') {
+                if ($params['sort'] == 'created_at' && $params['direction'] == 'asc') {
                     $sort = 'Oldest';
                 }
             }
@@ -70,11 +70,5 @@ class BookController extends Controller
         return ($sort);
     }
 
-    //Returns the number of books added to favorites from the authenticated user
-    public function numberOfFavorites(): int
-    {
-        $count = Favorite::query()->where('user_id','=', auth()->id())->count();
 
-        return ($count);
-    }
 }

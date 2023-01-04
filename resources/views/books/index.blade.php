@@ -54,11 +54,11 @@
                                 Highest price
                             </x-sort-item>
                             <x-sort-item
-                                href="/?sort=created_at&direction=asc&{{ http_build_query(request()->except('page', 'sort', 'direction')) }}">
+                                href="/?sort=created_at&direction=desc&{{ http_build_query(request()->except('page', 'sort', 'direction')) }}">
                                 Newest
                             </x-sort-item>
                             <x-sort-item
-                                href="/?sort=created_at&direction=desc&{{ http_build_query(request()->except('page', 'sort', 'direction')) }}">
+                                href="/?sort=created_at&direction=asc&{{ http_build_query(request()->except('page', 'sort', 'direction')) }}">
                                 Oldest
                             </x-sort-item>
                         </div>

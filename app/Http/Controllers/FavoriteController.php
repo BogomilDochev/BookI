@@ -14,7 +14,7 @@ class FavoriteController extends Controller
         return view('favorites.index', [
             'favoriteBooks' => Favorite::latest()->where('user_id','=', auth()->id())->filter(
                 request(['search']))->paginate(16)->withQueryString(),
-            'favorites' => (new BookController)->numberOfFavorites()
+            'favorites' => (new Book)->numberOfFavorites()
         ]);
     }
 

@@ -14,7 +14,7 @@ class AdminBookController extends Controller
             'books' => Book::latest()->filter(
                 request(['search'])
             )->paginate(50)->withQueryString(),
-            'favorites' => (new BookController)->numberOfFavorites()
+            'favorites' => (new Book)->numberOfFavorites()
         ]);
     }
 
@@ -25,7 +25,7 @@ class AdminBookController extends Controller
         }
 
         return view('admin.books.create', [
-            'favorites' => (new BookController)->numberOfFavorites()
+            'favorites' => (new Book)->numberOfFavorites()
         ]);
     }
 

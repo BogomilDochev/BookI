@@ -36,6 +36,14 @@ class Book extends Model
         );
     }
 
+    //Returns the number of books added to favorites from the authenticated user
+    public function numberOfFavorites(): int
+    {
+        $count = Favorite::query()->where('user_id','=', auth()->id())->count();
+
+        return ($count);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
