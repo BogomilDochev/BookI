@@ -21,7 +21,7 @@
                     <input
                         type="text"
                         name="search"
-                        class="block w-full p-4 pl-10 text-sm text-gray-900 rounded-3xl border border-gray-300 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                        class="block w-full p-4 pl-10 text-sm text-gray-900 rounded-3xl border border-gray-300 bg-gray-50 dark:bg-slate-800 dark:text-white focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Search for books.."
                         value="{{ request('search') }}"
                     >
@@ -35,7 +35,7 @@
         <div class="flex pt-8">
             <div class="flex pr-4">
 
-                <x-dropdown class="items-center pt-2 pr-5">
+                <x-dropdown class="items-center pt-2 pr-5 cursor-pointer">
                     <x-slot name="trigger" class="">
                         <button class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}</button>
                         <svg class = "transform -rotate-90 flex inline-flex " width="22"
@@ -43,7 +43,7 @@
                             <g fill="none" fill-rule="evenodd">
                                 <path stroke="#000" stroke-opacity=".012" stroke-width=".5" d="M21 1v20.16H.84V1z">
                                 </path>
-                                <path fill="#222"
+                                <path class="fill-black dark:fill-white"
                                       d="M13.854 7.224l-3.847 3.856 3.847 3.856-1.184 1.184-5.04-5.04 5.04-5.04z"></path>
                             </g>
                         </svg>
@@ -86,4 +86,5 @@
         </div>
     @endauth
 
+    <x-dark-mode-toggle top="top-28" />
 </header>

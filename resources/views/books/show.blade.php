@@ -34,7 +34,7 @@
 
         {{--section with buttons for adding to cart or wishlist--}}
         <div class="pl-28">
-            <div class="h-72 w-9/12  shadow-3xl">
+            <div class="h-72 w-9/12  shadow-3xl dark:bg-blue-900">
                 <p class="text-xl font-semibold p-5">Price: <span class="text-xl text-red-500">{{ $book->price }}</span>
                 </p>
                 <div class="grid grid-cols-1 grid-rows-3 pt-32">
@@ -89,7 +89,7 @@
                         <div class="mt-6">
                 <textarea
                     name="body"
-                    class="w-full text-sm"
+                    class="w-full text-sm dark:bg-slate-800"
                     rows="5"
                     placeholder="Quick, thing of something to say"
                     required></textarea>
@@ -107,18 +107,16 @@
                 </div>
             @else
                 <p class="font-semibold">
-                    <a href="/register" class="hover:underline">Register </a>or <a href="/login"
-                                                                                   class="hover:underline">Log in</a> to
-                    leave a comment.
+                    <a href="/register" class="hover:underline">Register </a>or <a href="/login" class="hover:underline">Log in</a> to leave a comment.
                 </p>
             @endauth
             @if(count($book->comment) > 0)
                 <section class="mt-10 space-y-6">
                     @foreach($book->comment as $comment)
-                        <article class="flex space-x-4 bg-gray-50">
+                        <article class="flex space-x-4 bg-gray-50 rounded-xl dark:bg-blue-900">
                             <div class="flex-shrink-0">
                                 <img src="/images/avatars/{{ $comment->user->avatar }}" alt="" width="60" height="60"
-                                     class="rounded-xl">
+                                     class="rounded-full">
                             </div>
 
                             <div>

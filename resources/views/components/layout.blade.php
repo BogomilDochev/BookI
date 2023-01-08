@@ -5,27 +5,9 @@
 <link rel="shortcut icon" type="image/png" href="images/logo.png">
 <!-- Fonts -->
 <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 <!-- Scripts -->
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-<script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                height: {
-                    '100': '28rem',
-                },
-                boxShadow: {
-                    '3xl': 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
-                },
-                left: {
-                    '1/5': '20%'
-                }
-            }
-        }
-    }
-</script>
 
 <style>
     #bookBorder:before {
@@ -51,9 +33,11 @@
     }
 </style>
 
-<body class="flex flex-col min-h-screen">
+
+<body class="flex flex-col min-h-screen dark:bg-slate-900 dark:text-white">
 
 {{$slot}}
 
 <x-flash/>
+<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 </body>

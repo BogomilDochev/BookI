@@ -50,7 +50,7 @@ class AdminBookController extends Controller
 
         return view('admin.books.edit', [
             'book' => $book,
-            'favorites' => (new BookController)->numberOfFavorites()
+            'favorites' => (new Book)->numberOfFavorites()
         ]);
     }
 

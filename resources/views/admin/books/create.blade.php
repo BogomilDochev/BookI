@@ -14,7 +14,7 @@
             <div>
                 <x-form.input-label for="category">Category</x-form.input-label>
                 <select
-                    class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-96 h-8"
+                    class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-96 h-8 dark:bg-slate-800 dark:text-white"
                     name="category_id"
                     id="category_id"
                 >
@@ -35,7 +35,7 @@
 
             <div>
                 <x-form.input-label for="description">Description</x-form.input-label>
-                <textarea class="border border-gray-200 p-2 w-96 rounded h-36"
+                <textarea class="border border-gray-200 p-2 w-96 rounded h-36 dark:bg-slate-800 dark:text-white"
                           name="description"
                           id="description"
                           required

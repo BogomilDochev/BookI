@@ -1,5 +1,7 @@
 <x-layout>
     <div class="font-sans text-gray-900 antialiased">
+        <x-dark-mode-toggle top="top-4" />
+
         <x-auth-card>
             <x-slot name="logo">
                 <a href="/">
@@ -37,7 +39,7 @@
                 <x-form.input name="password_confirmation" type="password" label="Confirm Password" required/>
 
                 <div class="flex items-center justify-end mt-4">
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-white dark:hover:text-blue-600 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                         {{ __('Already registered?') }}
                     </a>
 
