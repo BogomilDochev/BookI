@@ -79,10 +79,10 @@
                                      class="shrink-0 h-44 w-28 pt-2">
                             @endif
                             <div class="relative">
-                                <p class="absolute left-1/2 -top-7 transform -translate-x-1/2  w-48 text-base font-semibold text-center">{{ $book->title }}</p>
-                                <p class="absolute left-1/2 top-6 transform -translate-x-1/2  w-48 text-sm text-center">{{ $book->author}}</p>
+                                <p class="absolute left-1/2 -top-3 transform -translate-x-1/2  w-48 text-base font-semibold text-center">{{ $book->title }}</p>
+                                <p class="absolute left-1/2 top-10 transform -translate-x-1/2  w-48 text-sm text-center">{{ $book->author}}</p>
                             </div>
-                            <div class="grid grid-cols-1 grid-rows-3 place-self-center">
+                            <div class="grid grid-cols-1 grid-rows-3 place-self-center mt-12">
                                 <p class="text-xl text-red-500 text-center">${{ $book->price }}</p>
                                 <x-primary-button onclick="location.href='/books/{{ $book->slug }}';"
                                                   class="h-8">Review

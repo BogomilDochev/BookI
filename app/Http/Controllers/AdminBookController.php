@@ -38,6 +38,8 @@ class AdminBookController extends Controller
 
         $attributes = $this->validatingInputs($book);
 
+        $attributes['slug'] = $this->slugGenerator($attributes['title']);
+
         $attributes = $this->checkIfCoverExists($attributes);
 
         Book::create($attributes);
@@ -81,7 +83,7 @@ class AdminBookController extends Controller
     {
         $attributes = request()->validate([
             'title' => 'required',
-            'slug' => ['required', Rule::unique('books', 'slug')->ignore($book)],
+            'slug' => [Rule::unique('books', 'slug')->ignore($book)],
             'cover' => 'nullable|image',
             'author' => 'required',
             'publisher' => 'required',
@@ -104,6 +106,16 @@ class AdminBookController extends Controller
             $attributes['cover'] = request()->file('cover')->store('books');
         }
         return $attributes;
+    }
+
+    //Generates slug from the title of a book
+    public function slugGenerator($title): string
+    {
+        $lowerCase = strtolower($title);
+
+        $slug = str_replace(' ', '-', $lowerCase);
+
+        return $slug;
     }
 
 }
