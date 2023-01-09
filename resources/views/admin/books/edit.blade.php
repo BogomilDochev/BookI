@@ -1,5 +1,5 @@
 <x-layout>
-    <x-header favorites="{{ $favorites }}"/>
+    <x-header favorites="{{ $favorites }}" cartItems="{{ $cartItems }}"/>
     <x-setting :heading="'Edit Book: ' . $book->title">
         <form method="POST" action="/admin/books/{{ $book->id }}" enctype="multipart/form-data">
             @csrf

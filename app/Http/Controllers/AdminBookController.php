@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\BuyItem;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -14,7 +15,8 @@ class AdminBookController extends Controller
             'books' => Book::latest()->filter(
                 request(['search'])
             )->paginate(50)->withQueryString(),
-            'favorites' => (new Book)->numberOfFavorites()
+            'favorites' => (new Book)->numberOfFavorites(),
+            'cartItems' => (new BuyItem)->numberOfCartItems()
         ]);
     }
 
@@ -25,7 +27,8 @@ class AdminBookController extends Controller
         }
 
         return view('admin.books.create', [
-            'favorites' => (new Book)->numberOfFavorites()
+            'favorites' => (new Book)->numberOfFavorites(),
+            'cartItems' => (new BuyItem)->numberOfCartItems()
         ]);
     }
 
@@ -50,7 +53,8 @@ class AdminBookController extends Controller
 
         return view('admin.books.edit', [
             'book' => $book,
-            'favorites' => (new Book)->numberOfFavorites()
+            'favorites' => (new Book)->numberOfFavorites(),
+            'cartItems' => (new BuyItem)->numberOfCartItems()
         ]);
     }
 
@@ -84,7 +88,7 @@ class AdminBookController extends Controller
             'category_id' => ['required', Rule::exists('categories', 'id')],
             'description' => 'required',
             'price' => 'required|numeric|min:0|max:999',
-            'date' => 'required|date_format:"Y-m-d',
+            'date' => 'required|date_format:Y-m-d|before_or_equal:now',
             'pages' => 'required',
             'dimensions' => 'required',
             'languages' => 'required',

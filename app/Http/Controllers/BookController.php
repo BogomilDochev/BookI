@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\BuyItem;
 use App\Models\Category;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
@@ -19,7 +20,8 @@ class BookController extends Controller
             )->paginate(16)->withQueryString(),
             'categories' => Category::all(),
             'currentSort' => $this->currentSorting(),
-            'favorites' => (new Book)->numberOfFavorites()
+            'favorites' => (new Book)->numberOfFavorites(),
+            'cartItems' => (new BuyItem)->numberOfCartItems()
         ]);
     }
 
@@ -31,7 +33,8 @@ class BookController extends Controller
 
         return view('books.show', [
            'book' => $book,
-           'favorites' => (new Book)->numberOfFavorites()
+           'favorites' => (new Book)->numberOfFavorites(),
+           'cartItems' => (new BuyItem)->numberOfCartItems()
 
         ]);
     }

@@ -1,5 +1,5 @@
 <x-layout>
-    <x-header favorites="{{ $favorites }}"/>
+    <x-header favorites="{{ $favorites }}" cartItems="{{ $cartItems }}" />
     <main class=" pt-10 grid grid-cols-3 ">
 
         {{--section displaying the cover--}}

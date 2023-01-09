@@ -1,5 +1,5 @@
 <x-layout>
-    <x-header favorites="{{ $favorites }}"/>
+    <x-header favorites="{{ $favorites }}" cartItems="{{ $cartItems }}"/>
     <main>
         @if($favorites==0)
             <p>No books in favorites</p>
@@ -8,13 +8,13 @@
                 @foreach($favoriteBooks as $favorite)
                     <div class="flex grid grid-cols-5 border-2 m-2 h-40">
                         @if($favorite->book->cover == null)
-                            <img src="/images/imageNotAvailable.png" alt="{{ $favorite->book->title }}"
-                                 class="shrink-0 w-24 h-32 mt-4 ml-10">
+                            <a href="/books/{{ $favorite->book->slug }}"><img src="/images/imageNotAvailable.png" alt="{{ $favorite->book->title }}"
+                                 class="shrink-0 w-24 h-32 mt-4 ml-10"></a>
                         @else
-                            <img src="{{ asset('storage/' . $favorite->book->cover) }}" alt="{{ $favorite->book->title }}"
-                                 class="shrink-0 w-24 h-32 mt-4 ml-10">
+                            <a href="/books/{{ $favorite->book->slug }}"><img src="{{ asset('storage/' . $favorite->book->cover) }}" alt="{{ $favorite->book->title }}"
+                                 class="shrink-0 w-24 h-32 mt-4 ml-10"></a>
                         @endif
-                        <p class="text-center place-self-center"> {{ $favorite->book->title }}</p>
+                        <a href="/books/{{ $favorite->book->slug }}" class="text-center place-self-center hover:text-blue-600 focus:text-blue-900"> {{ $favorite->book->title }}</a>
 
                         <p class="text-center place-self-center text-red-500"> ${{ $favorite->book->price }}</p>
 

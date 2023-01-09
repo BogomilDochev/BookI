@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\BuyItem;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,8 @@ class FavoriteController extends Controller
         return view('favorites.index', [
             'favoriteBooks' => Favorite::latest()->where('user_id','=', auth()->id())->filter(
                 request(['search']))->paginate(16)->withQueryString(),
-            'favorites' => (new Book)->numberOfFavorites()
+            'favorites' => (new Book)->numberOfFavorites(),
+            'cartItems' => (new BuyItem)->numberOfCartItems()
         ]);
     }
 
@@ -26,7 +28,7 @@ class FavoriteController extends Controller
                 'user_id' => auth()->id(),
             ]);
 
-            return back();
+            return back()->with('success', 'The item was added to favorites');
         } catch (\Illuminate\Database\QueryException $ex) {
             return back()->with('error', 'The item was already added to favorites');
         }

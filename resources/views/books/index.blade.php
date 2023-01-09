@@ -1,5 +1,5 @@
 <x-layout>
-    <x-header favorites="{{ $favorites }}"/>
+    <x-header favorites="{{ $favorites }}" cartItems="{{ $cartItems }}" />
 
     <main class="flex pl-20 pr-12 pt-10">
 
@@ -79,14 +79,21 @@
                                      class="shrink-0 h-44 w-28 pt-2">
                             @endif
                             <div class="relative">
-                                <p class="absolute left-1/2 -top-16 transform -translate-x-1/2  w-48 text-base font-semibold text-center">{{ $book->title }}</p>
-                                <p class="absolute left-1/2 top-8 transform -translate-x-1/2  w-48 text-sm text-center">{{ $book->author}}</p>
+                                <p class="absolute left-1/2 -top-7 transform -translate-x-1/2  w-48 text-base font-semibold text-center">{{ $book->title }}</p>
+                                <p class="absolute left-1/2 top-6 transform -translate-x-1/2  w-48 text-sm text-center">{{ $book->author}}</p>
                             </div>
-                            <div class="relative">
-                                <p class="text-xl text-red-500 absolute bottom-12 -right-7">${{ $book->price }}</p>
+                            <div class="grid grid-cols-1 grid-rows-3 place-self-center">
+                                <p class="text-xl text-red-500 text-center">${{ $book->price }}</p>
                                 <x-primary-button onclick="location.href='/books/{{ $book->slug }}';"
-                                                  class="absolute bottom-2 -right-10">Review
+                                                  class="h-8">Review
                                 </x-primary-button>
+                                <form method="POST" action="/books/{{ $book->slug }}/cart">
+                                    @csrf
+                                    <x-primary-button
+                                        class="w-28 bg-red-500 hover:bg-red-700 focus:ring-1 focus:ring-red-300">Add to
+                                        cart
+                                    </x-primary-button>
+                                </form>
                             </div>
                         </div>
                     @endforeach

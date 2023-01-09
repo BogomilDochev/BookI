@@ -1,4 +1,4 @@
-@props(['favorites'])
+@props(['favorites', 'cartItems'])
 
 <header class="flex justify-between border-b-2 border-blue-300 pl-10 pr-5">
     <div class="pt-3">
@@ -64,7 +64,12 @@
                     <span class="absolute right-32 top-12 bg-red-600 h-6 w-6 rounded-xl text-white text-center align-middle">{{ $favorites }}</span>
                 </div>
 
-                <a href="/cart"><img src="/images/cart.png" alt="Cart" class="shrink-0 w-8 h-8 pt-1 mr-4" title="Cart"></a>
+                <div class="static">
+                    <a href="/cart"><img src="/images/cart.png" alt="Cart" class="shrink-0 w-8 h-8 pt-1 mr-4" title="Cart"></a>
+                    <span class="absolute right-20 top-12 bg-red-600 h-6 w-6 rounded-xl text-white text-center align-middle">{{ $cartItems }}</span>
+                </div>
+
+
 
                 <form id="logout-form" method="POST" action="/logout" class="hidden">
                     @csrf
