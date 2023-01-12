@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('cover')->nullable();
             $table->text('description');
             $table->decimal('price',6,2);
+            $table->integer('inStockQuantity')->default(10);
             $table->date('date');
             $table->integer('pages');
             $table->string('dimensions');

@@ -24,6 +24,7 @@
 
             <x-form.input name="author" type="text" :value="old('author', $book->author)">*</x-form.input>
             <x-form.input name="publisher" type="text" :value="old('publisher', $book->publisher)">*</x-form.input>
+            <x-form.input name="quantity" type="number" :value="old('quantity', $book->quantity)">*</x-form.input>
 
             <div>
                 <x-form.input-label for="category">Category*</x-form.input-label>

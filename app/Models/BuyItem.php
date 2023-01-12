@@ -9,7 +9,7 @@ class BuyItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id'];
+    protected $fillable = ['user_id', 'productQuantity'];
 
     public function scopeFilter($query, array $filters)
     {
@@ -44,7 +44,7 @@ class BuyItem extends Model
 
             for($i=0; $i<$allBuyItems; $i++)
             {
-                $price[] = $total[$i]->book->price;//
+                $price[] = $total[$i]->book->price * $total[$i]->productQuantity;//
             }
         }
 

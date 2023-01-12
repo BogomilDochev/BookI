@@ -34,6 +34,8 @@ Route::post('/books/{book:slug}/favorites', [FavoriteController::class, 'store']
 
 Route::get('/cart', [BuyItemController::class, 'index'])->middleware('auth');
 Route::post('/books/{book:slug}/cart', [BuyItemController::class, 'store'])->middleware('auth');
+Route::patch('/cart/{buyItem:id}/increase', [BuyItemController::class, 'increaseQuantity'])->middleware('auth');
+Route::patch('/cart/{buyItem:id}/decrease', [BuyItemController::class, 'decreaseQuantity'])->middleware('auth');
 Route::delete('/cart/{item}', [BuyItemController::class, 'destroy'])->middleware('auth');
 Route::delete('/cart', [BuyItemController::class, 'destroyAll'])->middleware('auth');
 

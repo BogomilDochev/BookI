@@ -10,6 +10,7 @@
             <x-form.input name="cover" type="file"/>
             <x-form.input name="author" type="text">*</x-form.input>
             <x-form.input name="publisher" type="text">*</x-form.input>
+            <x-form.input name="quantity" type="number">*</x-form.input>
 
             <div>
                 <x-form.input-label for="category">Category*</x-form.input-label>
@@ -30,7 +31,7 @@
                     @endforeach
                 </select>
 
-                <x-form.input-error name="category">*</x-form.input>
+                <x-form.input-error name="category">*</x-form.input-error>
             </div>
 
             <div>

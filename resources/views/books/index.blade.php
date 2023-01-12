@@ -87,13 +87,18 @@
                                 <x-primary-button onclick="location.href='/books/{{ $book->slug }}';"
                                                   class="h-8">Review
                                 </x-primary-button>
-                                <form method="POST" action="/books/{{ $book->slug }}/cart">
-                                    @csrf
-                                    <x-primary-button
-                                        class="w-28 bg-red-500 hover:bg-red-700 focus:ring-1 focus:ring-red-300">Add to
-                                        cart
-                                    </x-primary-button>
-                                </form>
+
+                                @if($book->inStockQuantity>0)
+                                    <form method="POST" action="/books/{{ $book->slug }}/cart">
+                                        @csrf
+                                        <x-primary-button
+                                            class="w-28 bg-red-500 hover:bg-red-700 focus:ring-1 focus:ring-red-300">Add to
+                                            cart
+                                        </x-primary-button>
+                                    </form>
+                                @else
+                                    <p class="pt-2">Not available</p>
+                                @endif
                             </div>
                         </div>
                     @endforeach

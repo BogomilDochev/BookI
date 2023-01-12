@@ -31,11 +31,17 @@ class BookController extends Controller
             return redirect('/');
         }
 
+        if($book->inStockQuantity == 0) {
+            $quantityLabel = 'In Stock: Not available';
+        } else {
+            $quantityLabel = 'In Stock: ' . $book->inStockQuantity;
+        }
+
         return view('books.show', [
            'book' => $book,
            'favorites' => (new Book)->numberOfFavorites(),
-           'cartItems' => (new BuyItem)->numberOfCartItems()
-
+           'cartItems' => (new BuyItem)->numberOfCartItems(),
+           'quantityLabel' => $quantityLabel
         ]);
     }
 

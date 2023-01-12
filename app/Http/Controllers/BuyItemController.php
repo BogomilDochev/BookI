@@ -22,10 +22,13 @@ class BuyItemController extends Controller
     public function store(Book $book)
     {
         try {
-            //add a book to favorites of the logged in person
-            $book->buyitems()->create([
-                'user_id' => auth()->id(),
-            ]);
+            $buyItem = new BuyItem();
+
+            $buyItem->user_id = auth()->id();
+            $buyItem->book_id = $book->id;
+            $buyItem->productQuantity = request('quantity');
+
+            $buyItem->save();
 
             return back()->with('success', 'The item was added to the cart');
         } catch (\Illuminate\Database\QueryException $ex) {
@@ -43,9 +46,39 @@ class BuyItemController extends Controller
 
     public function destroyAll()
     {
+        $cartItems = BuyItem::all();
+
+        foreach ($cartItems as $cartItem) {
+            $cartItem->book->decrement('inStockQuantity', $cartItem->productQuantity);
+        }
+
         BuyItem::query()->delete();
 
         return back()->with('success', 'Congratulations, you bought the books!');
+    }
+
+    public function increaseQuantity(BuyItem $buyItem)
+    {
+        try {
+            $buyItem->increment('productQuantity', 1);
+
+            return back();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return back()->with('error', 'You cannot buy more than 5 books');
+        }
+    }
+
+    public function decreaseQuantity(BuyItem $buyItem)
+    {
+        try {
+            $buyItem->decrement('productQuantity', 1);
+
+            return back();
+        } catch (\Illuminate\Database\QueryException $e) {
+            $buyItem->delete();
+
+            return redirect('/cart')->with('success', 'Book removed from cart!');
+        }
     }
 
 }

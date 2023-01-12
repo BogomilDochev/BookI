@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -17,9 +18,15 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('book_id')->constrained()->cascadeOnDelete();
+            $table->integer('productQuantity');
             $table->unique(['user_id', 'book_id']);
             $table->timestamps();
         });
+
+        DB::statement('
+        ALTER TABLE buy_items
+        ADD CONSTRAINT buy_items_productQuantity_check CHECK (productQuantity > 0 AND productQuantity <= 5)
+    ');
     }
 
     /**

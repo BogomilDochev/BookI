@@ -35,30 +35,36 @@
         {{--section with buttons for adding to cart or wishlist--}}
         <div class="pl-28">
             <div class="h-72 w-9/12  shadow-3xl dark:bg-blue-900">
-                <p class="text-xl font-semibold p-5">Price: <span class="text-xl text-red-500">{{ $book->price }}</span>
+                <p class="text-xl font-semibold pl-5 pt-5">Price: <span class="text-xl text-red-500">{{ $book->price }}</span>
                 </p>
-                <div class="grid grid-cols-1 grid-rows-3 pt-32">
+                <p class="pl-5">{{ $quantityLabel }}</p>
+                <div class="grid grid-cols-1 grid-rows-3 pt-24">
                     @auth
                         <div class="grid grid-cols-1 grid-rows-2 place-self-center">
-                            <form method="POST" action="/books/{{ $book->slug }}/favorites">
-                                @csrf
-                                <x-primary-button
-                                    class="w-36 bg-amber-400 hover:bg-amber-500 focus:ring-1 focus:ring-amber-300">Add
-                                    to wishlist
-                                </x-primary-button>
-                            </form>
+                            @if($book->inStockQuantity>0)
+                                <form method="POST" action="/books/{{ $book->slug }}/cart">
+                                    @csrf
+                                    <div class="text-center">
+                                        <label for="quantity"></label>
+                                        <input class="w-20 text-center p-1 " id="quantity" type="number" name="quantity" min="1" max="5" value="1">
+                                    </div>
 
-                            <form method="POST" action="/books/{{ $book->slug }}/cart">
-                                @csrf
-                                <x-primary-button
-                                    class="w-36 bg-red-500 hover:bg-red-700 focus:ring-1 focus:ring-red-300 mb-1">Add to
-                                    cart
-                                </x-primary-button>
-                            </form>
-
+                                    <x-primary-button
+                                        class="w-36 bg-red-500 hover:bg-red-700 focus:ring-1 focus:ring-red-300 mt-1">Add to
+                                        cart
+                                    </x-primary-button>
+                                </form>
+                            @endif
+                                <form method="POST" action="/books/{{ $book->slug }}/favorites">
+                                    @csrf
+                                    <x-primary-button
+                                        class="w-36 bg-amber-400 hover:bg-amber-500 focus:ring-1 focus:ring-amber-300 mt-1">Add
+                                        to wishlist
+                                    </x-primary-button>
+                                </form>
                         </div>
                     @else
-                        <p class="font-semibold text-center pt-8">
+                        <p class="font-semibold text-center pt-14">
                             <a href="/register" class="hover:underline">Register </a>or <a href="/login"
                                                                                            class="hover:underline">Log
                                 in</a> to add the book to your favorites or to buy it.

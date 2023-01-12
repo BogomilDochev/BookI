@@ -6,7 +6,7 @@
         @else
             <div class="mt-14">
                 @foreach($buyItems as $buyItem)
-                    <div class="flex grid grid-cols-5 border-2 m-2 h-40">
+                    <div class="flex grid grid-cols-6 border-2 m-2 h-40">
                         @if($buyItem->book->cover == null)
                             <a href="/books/{{ $buyItem->book->slug }}"><img src="/images/imageNotAvailable.png" alt="{{ $buyItem->book->title }}"
                                  class="shrink-0 w-24 h-32 mt-4 ml-10"></a>
@@ -16,9 +16,23 @@
                         @endif
                         <a href="/books/{{ $buyItem->book->slug }}" class="text-center place-self-center hover:text-blue-600 focus:text-blue-900"> {{ $buyItem->book->title }}</a>
 
-                        <p class="text-center place-self-center text-red-500"> ${{ $buyItem->book->price }}</p>
+                        <p class="price text-center place-self-center text-red-500">{{ $buyItem->book->price }}</p>
 
                         <p class="text-center place-self-center"> {{ $buyItem->book->pages }} pages</p>
+
+                        <div class="grid grid-cols-3 place-self-center">
+                            <form method="POST" action="/cart/{{ $buyItem->id }}/decrease">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="bg-amber-400 w-7 rounded-full text-xl">-</button>
+                            </form>
+                            <p class="text-center"> {{ $buyItem->productQuantity }}</p>
+                            <form method="POST" action="/cart/{{ $buyItem->id }}/increase">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="bg-amber-400 w-7 rounded-full text-xl">+</button>
+                            </form>
+                        </div>
 
                         <form method="POST" action="/cart/{{ $buyItem->id }}">
                             @csrf
@@ -33,7 +47,8 @@
                 @endforeach
             </div>
 
-            <p class="text-right text-3xl font-semibold pr-4">Total: {{ $total }}</p>
+            <p id="total" class="text-right text-3xl font-semibold pr-4">Total: {{ $total }}</p>
+
             <form method="POST" action="/cart" class="grid justify-items-center ">
                 @csrf
                 @method('DELETE')

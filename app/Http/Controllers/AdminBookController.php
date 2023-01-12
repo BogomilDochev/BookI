@@ -87,6 +87,7 @@ class AdminBookController extends Controller
             'cover' => 'nullable|image',
             'author' => 'required',
             'publisher' => 'required',
+            'quantity' => 'required|integer|min:0',
             'category_id' => ['required', Rule::exists('categories', 'id')],
             'description' => 'required',
             'price' => 'required|numeric|min:0|max:999',
